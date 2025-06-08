@@ -7,33 +7,33 @@ pipeline {
         checkout scm
       }
     }
-  }
 
-  stage('Build Docker Image') {
-    steps {
-      sh 'docker-compose build'
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker-compose build'
+      }
     }
-  }
 
-  stage('Create Docker Network') {
-    steps {
-      sh '''
-        if ! docker network inspect anoto-network >/dev/null 2>&1; then
-          docker network create anoto-network
-        fi
-      '''
+    stage('Create Docker Network') {
+      steps {
+        sh '''
+          if ! docker network inspect anoto-network >/dev/null 2>&1; then
+            docker network create anoto-network
+          fi
+        '''
+      }
     }
-  }
 
-  stage('Deploy') {
-    steps {
-      sh '''
-        docker-compose down || true
-        docker-compose up -d
+    stage('Deploy') {
+      steps {
+        sh '''
+          docker-compose down || true
+          docker-compose up -d
 
-        sleep 10
-        docker ps | grep anoto-backend
-      '''
+          sleep 10
+          docker ps | grep anoto-backend
+        '''
+      }
     }
   }
 
