@@ -10,9 +10,8 @@ services:
       - DB_HOST=anoto-db
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=root
+      - DB_PASS=root
       - DB_NAME=anoto
-      - HOSTNAME=0.0.0.0
     restart: unless-stopped
     networks:
       - anoto-network
