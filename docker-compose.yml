@@ -7,11 +7,44 @@ services:
     environment:
       - NODE_ENV=production
       - APP_PORT=8080
+      - DB_HOST=anoto-db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=anoto
       - HOSTNAME=0.0.0.0
     restart: unless-stopped
+    networks:
+      - anoto-network
+
+  anoto-db:
+    image: mariadb:11.5
+    container_name: anoto-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=anoto
+    volumes:
+      - anoto-db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - anoto-network
+
+  anoto-pma:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: anoto-pma
+    restart: unless-stopped
+    environment:
+      - PMA_HOST=anoto-db
+      - PMA_PORT=3306
+      - PMA_USER=root
     networks:
       - anoto-network
 
 networks:
   anoto-network:
     external: true
+
+volumes:
+  anoto-db-data:
