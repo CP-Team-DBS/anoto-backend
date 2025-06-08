@@ -1,0 +1,17 @@
+services:
+  anoto-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anoto-backend
+    environment:
+      - NODE_ENV=production
+      - APP_PORT=8080
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
+    networks:
+      - anoto-network
+
+networks:
+  anoto-network:
+    external: true
