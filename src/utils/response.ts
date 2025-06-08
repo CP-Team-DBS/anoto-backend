@@ -4,10 +4,11 @@ type ResponseSuccess<T extends object = object> = {
   data?: T;
 };
 
-type ResponseError = {
+type ResponseError<T extends object = object> = {
   error: true;
   statusCode: number;
   message: string;
+  data?: T;
 };
 
 export function successResponse<T extends object>(
@@ -21,13 +22,15 @@ export function successResponse<T extends object>(
   };
 }
 
-export function errorResponse(
+export function errorResponse<T extends object = object>(
   message: string,
   statusCode: number,
-): ResponseError {
+  data?: T,
+): ResponseError<T> {
   return {
     error: true,
     statusCode,
     message,
+    ...(data ? { data } : {}),
   };
 }

@@ -12,4 +12,9 @@ export class TestimonialRepository {
   async findAll(): Promise<Testimonial[]> {
     return this.repo.find();
   }
+
+  async create(name: string, text: string): Promise<Testimonial> {
+    const testimonial = this.repo.create({ name, text });
+    return this.repo.save(testimonial);
+  }
 }

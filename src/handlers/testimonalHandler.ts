@@ -16,3 +16,19 @@ export const getTestimonials = async (request: Request, h: ResponseToolkit) => {
     )
     .code(200);
 };
+
+export const createTestimonial = async (
+  request: Request,
+  h: ResponseToolkit,
+) => {
+  const { name, text } = request.payload as { name: string; text: string };
+  const testimonial = await testimonialRepo.create(name, text);
+
+  return h
+    .response(
+      successResponse('Testimonial created successfully', {
+        testimonial: TestimonialResource.toJSON(testimonial),
+      }),
+    )
+    .code(201);
+};

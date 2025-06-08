@@ -11,10 +11,10 @@ export class Testimonial {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ length: 100 })
   name!: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   text!: string;
 
   @CreateDateColumn({ name: 'created_at' })
