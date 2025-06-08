@@ -35,7 +35,6 @@ services:
     environment:
       - PMA_HOST=anoto-db
       - PMA_PORT=3306
-      - PMA_USER=root
     networks:
       - anoto-network
 
