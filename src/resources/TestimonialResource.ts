@@ -6,6 +6,7 @@ export class TestimonialResource {
       id: testi.id,
       name: testi.name,
       text: testi.text,
+      rating: testi.rating,
       createdAt: testi.createdAt.toISOString(),
       updatedAt: testi.updatedAt.toISOString(),
     };

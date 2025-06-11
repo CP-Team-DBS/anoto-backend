@@ -17,6 +17,9 @@ export class Testimonial {
   @Column({ type: 'longtext' })
   text!: string;
 
+  @Column({ type: 'int' })
+  rating!: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;
 

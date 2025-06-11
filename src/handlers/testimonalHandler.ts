@@ -21,8 +21,13 @@ export const createTestimonial = async (
   request: Request,
   h: ResponseToolkit,
 ) => {
-  const { name, text } = request.payload as { name: string; text: string };
-  const testimonial = await testimonialRepo.create(name, text);
+  const { name, text, rating } = request.payload as {
+    name: string;
+    text: string;
+    rating: number;
+  };
+
+  const testimonial = await testimonialRepo.create(name, text, rating);
 
   return h
     .response(
