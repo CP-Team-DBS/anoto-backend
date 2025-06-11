@@ -11,7 +11,7 @@ type TestResult = {
 export class TestRepository {
   async getResult(values: TestSchema): Promise<TestResult> {
     const response = await request(
-      'https://gad7.anoto.my.id/predict',
+      `${process.env.GAD7_API_URL}/predict`,
       'POST',
       Object.fromEntries(
         values.answers.map((item) => [

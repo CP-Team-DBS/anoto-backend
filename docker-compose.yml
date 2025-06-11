@@ -12,6 +12,7 @@ services:
       - DB_USER=root
       - DB_PASS=root
       - DB_NAME=anoto
+      - GAD7_API_URL=http://anoto-gad7:8000
     restart: unless-stopped
     networks:
       - anoto-network
