@@ -1,7 +1,7 @@
 export default async (
   url: string,
   method: string,
-  body: any,
+  body: Record<string, number | string>,
 ): Promise<Response> => {
   const response = await fetch(url, {
     method,
