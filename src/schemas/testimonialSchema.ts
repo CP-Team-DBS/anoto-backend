@@ -8,16 +8,16 @@ const testimonialObject = Joi.object({
   rating: Joi.number().example(5),
   createdAt: Joi.string().example('2024-03-20T10:00:00.000Z'),
   updatedAt: Joi.string().example('2024-03-20T10:00:00.000Z'),
-});
+}).label('Testimonial Object');
 
 export const getResponse = createResponseSchema(
   'Testimonials fetched successfully',
   Joi.array().items(testimonialObject),
   'testimonials',
-);
+).label('Get Testimonials Response');
 
 export const createResponse = createResponseSchema(
   'Testimonial created successfully',
   testimonialObject,
   'testimonial',
-);
+).label('Create Testimonial Response');
