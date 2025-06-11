@@ -17,6 +17,11 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.28.0",
+    "@types/hapi__hapi": "^20.0.13",
+    "@types/hapi__inert": "^5.2.10",
+    "@types/hapi__joi": "^17.1.15",
+    "@types/joi": "^17.2.2",
+    "@types/node": "^24.0.0",
     "eslint": "^9.28.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
@@ -26,8 +31,10 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.0",
-    "@types/joi": "^17.2.3",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.3",
     "dotenv": "^16.5.0",
+    "hapi-swagger": "^17.3.2",
     "joi": "^17.12.2",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
