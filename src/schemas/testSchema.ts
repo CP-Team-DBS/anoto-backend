@@ -2,7 +2,7 @@ import Joi from 'joi';
 import { createResponseSchema } from '../utils/schema';
 
 export type TestSchema = {
-  answers: {
+  values: {
     question: string;
     answer: string;
   }[];

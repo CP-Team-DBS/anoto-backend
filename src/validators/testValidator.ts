@@ -18,7 +18,7 @@ const allowedAnswers: string[] = [
 ];
 
 export const testValidator = Joi.object({
-  answers: Joi.array()
+  values: Joi.array()
     .items(
       Joi.object({
         question: Joi.string()

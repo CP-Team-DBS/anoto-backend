@@ -9,12 +9,12 @@ type TestResult = {
 };
 
 export class TestRepository {
-  async getResult(values: TestSchema): Promise<TestResult> {
+  async getResult(data: TestSchema): Promise<TestResult> {
     const response = await request(
       `${process.env.GAD7_API_URL}/predict`,
       'POST',
       Object.fromEntries(
-        values.answers.map((item) => [
+        data.values.map((item) => [
           item.question.replace(/ /g, '_').toLowerCase(),
           item.answer,
         ]),
