@@ -9,6 +9,8 @@ type StatsResult = {
   percentage: number;
 };
 
+const ANXIETY_THRESHOLD = 5;
+
 export class StatisticRepository {
   private repo: Repository<Statistic>;
 
@@ -36,12 +38,12 @@ export class StatisticRepository {
     });
 
     if (existingRecord) {
-      existingRecord.isAnxiety = score >= 10;
+      existingRecord.isAnxiety = score >= ANXIETY_THRESHOLD;
       await this.repo.save(existingRecord);
     } else {
       await this.repo.save(
         this.repo.create({
-          isAnxiety: score >= 10,
+          isAnxiety: score >= ANXIETY_THRESHOLD,
           ipAddress: clientIP,
         }),
       );
