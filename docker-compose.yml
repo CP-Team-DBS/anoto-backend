@@ -13,6 +13,7 @@ services:
       - DB_PASS=root
       - DB_NAME=anoto
       - GAD7_API_URL=http://anoto-gad7:8000
+      - JOURNAL_API_URL=http://anoto-journal:8000
     restart: unless-stopped
     networks:
       - anoto-network

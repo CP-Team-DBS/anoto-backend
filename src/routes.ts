@@ -6,8 +6,11 @@ import * as testimonialHandler from './handlers/testimonalHandler';
 import * as testimonialSchemas from './schemas/testimonialSchema';
 import * as testHandler from './handlers/testHandler';
 import * as testSchemas from './schemas/testSchema';
+import * as journalHandler from './handlers/journalHandler';
+import * as journalSchemas from './schemas/journalSchema';
 import * as statisticSchemas from './schemas/statisticSchema';
 import * as statisticHandler from './handlers/statisticHandler';
+import { journalValidator } from './validators/journalValidator';
 
 export default [
   {
@@ -49,7 +52,20 @@ export default [
       }),
     },
   },
-
+  {
+    path: '/journals',
+    method: 'POST',
+    handler: journalHandler.getResult,
+    options: {
+      tags: ['api'],
+      response: {
+        schema: journalSchemas.getResponse,
+      },
+      ...validate({
+        payload: journalValidator,
+      }),
+    },
+  },
   {
     path: '/statistics',
     method: 'GET',
