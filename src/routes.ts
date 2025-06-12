@@ -6,6 +6,8 @@ import * as testimonialHandler from './handlers/testimonalHandler';
 import * as testimonialSchemas from './schemas/testimonialSchema';
 import * as testHandler from './handlers/testHandler';
 import * as testSchemas from './schemas/testSchema';
+import * as statisticSchemas from './schemas/statisticSchema';
+import * as statisticHandler from './handlers/statisticHandler';
 
 export default [
   {
@@ -45,6 +47,18 @@ export default [
       ...validate({
         payload: testValidator,
       }),
+    },
+  },
+
+  {
+    path: '/statistics',
+    method: 'GET',
+    handler: statisticHandler.getStatistics,
+    options: {
+      tags: ['api'],
+      response: {
+        schema: statisticSchemas.getResponse,
+      },
     },
   },
 ] as ServerRoute[];

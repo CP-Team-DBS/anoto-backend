@@ -1,9 +1,7 @@
-import { Repository } from 'typeorm';
-import { Statistic } from '../entities/Statistic';
 import { TestSchema } from '../schemas/testSchema';
 import request from '../utils/request';
-import { AppDataSource } from '../config/database';
 import { Request } from '@hapi/hapi';
+import { StatisticRepository } from './StatisticRepository';
 
 type TestResult = {
   total_score: number;
@@ -13,23 +11,10 @@ type TestResult = {
 };
 
 export class TestRepository {
-  private statRepo: Repository<Statistic>;
+  private statRepo: StatisticRepository;
 
   constructor() {
-    this.statRepo = AppDataSource.getRepository(Statistic);
-  }
-
-  private getClientIP(request: Request): string {
-    // Cloudflare IP
-    const cfIP = request.headers['cf-connecting-ip'];
-    if (cfIP) return cfIP;
-
-    const forwardedFor = request.headers['x-forwarded-for'];
-    if (forwardedFor) {
-      return forwardedFor.split(',')[0].trim();
-    }
-
-    return request.info.remoteAddress;
+    this.statRepo = new StatisticRepository();
   }
 
   async getResult(data: TestSchema, req: Request): Promise<TestResult> {
@@ -46,23 +31,7 @@ export class TestRepository {
       );
 
       const result = (await response.json()) as TestResult;
-      const clientIP = this.getClientIP(req);
-
-      const existingRecord = await this.statRepo.findOne({
-        where: { ipAddress: clientIP },
-      });
-
-      if (existingRecord) {
-        existingRecord.isAnxiety = result.total_score >= 10;
-        await this.statRepo.save(existingRecord);
-      } else {
-        await this.statRepo.save(
-          this.statRepo.create({
-            isAnxiety: result.total_score >= 10,
-            ipAddress: clientIP,
-          }),
-        );
-      }
+      await this.statRepo.create(req, result.total_score);
 
       return result;
     } catch (error) {
