@@ -7,7 +7,11 @@ const testRepo = new TestRepository();
 
 export const getResult = async (request: Request, h: ResponseToolkit) => {
   try {
-    const result = await testRepo.getResult(request.payload as TestSchema);
+    const result = await testRepo.getResult(
+      request.payload as TestSchema,
+      request,
+    );
+
     return h.response(successResponse('Test Result', { result })).code(200);
   } catch (error) {
     if (error instanceof Error)

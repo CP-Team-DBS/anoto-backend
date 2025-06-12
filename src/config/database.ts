@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Testimonial } from '../entities/Testimonial';
+import { Statistic } from '../entities/Statistic';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -9,5 +10,5 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   synchronize: true,
-  entities: [Testimonial],
+  entities: [Testimonial, Statistic],
 });
